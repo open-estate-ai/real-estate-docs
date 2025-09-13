@@ -15,7 +15,7 @@ edit_uri: edit/main/docs/
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Architecture: architecture.md
+  - Architecture: architecture/overview.md
   - Guides:
       - Scrapers: guides/scrapers.md
       - Data Lake: guides/datalake.md

@@ -32,7 +32,6 @@ We build tools and workflows for:
 We welcome contributions!  
 See our [Contributing](contributing.md) page for guidelines and tips.
 
-
 ## License
 This template is served under the MIT license.  
 Read the [LICENSE] file for more info.

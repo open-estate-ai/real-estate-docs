@@ -1,0 +1,81 @@
+site_name: Open Estate AI Docs
+site_description: 'Comprehensive documentation for Open Estate AI projects'
+site_author: 'Open Estate AI Team'
+site_url: 'https://open-estate-ai.github.io/real-estate-docs/'
+
+copyright: |
+  &copy; Open Estate AI
+
+docs_dir: docs
+
+repo_name: open-estate-ai/real-estate-docs
+repo_url: https://github.com/open-estate-ai/real-estate-docs
+edit_uri: edit/main/docs/
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Architecture: architecture.md
+  - Guides:
+      - Scrapers: guides/scrapers.md
+      - Data Lake: guides/datalake.md
+      - MCP Server: guides/mcp-server.md
+      - AI Workflows: guides/ai-workflows.md
+  - Reference:
+      - API Reference: reference/api.md
+      - Terraform Modules: reference/terraform.md
+      - CDK Stacks: reference/cdk.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.sections
+    - search.highlight
+    - search.suggest
+    - toc.integrate
+  icon:
+    logo: material/library
+    repo: fontawesome/brands/github
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/open-estate-ai
+      name: GitHub
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/gfPYZ2F5
+      name: Discord
+  generator: true
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.details
+  - pymdownx.emoji
+  - pymdownx.tasklist
+  - pymdownx.mark
+  - pymdownx.highlight
+
+extra_css:
+  - assets/custom.css
+
+extra_javascript:
+  - assets/custom.js

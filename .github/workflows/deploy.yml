@@ -24,7 +24,8 @@ on:
     #
     #tags-ignore:
     #- '**'
-
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest

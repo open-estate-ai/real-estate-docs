@@ -55,9 +55,9 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/open-estate-ai
       name: GitHub
-    - icon: fontawesome/brands/discord
-      link: https://discord.gg/gfPYZ2F5
-      name: Discord
+    - icon: fontawesome/brands/slack
+      link: https://join.slack.com/t/open-estate-ai/shared_invite/zt-3dk65gu4h-SmBeySssL732C3ReHL_ejQ
+      name: Slack
   generator: true
 
 markdown_extensions:

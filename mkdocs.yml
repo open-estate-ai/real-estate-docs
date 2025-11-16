@@ -15,7 +15,10 @@ edit_uri: edit/main/docs/
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Architecture: architecture/overview.md
+  - Architecture:
+      - Overview: architecture/overview.md
+      - Data Ingestion: architecture/ingestion-architecture.md
+      - Multi-Agent System: architecture/multi-agent-architecture.md
   - Guides:
       - Scrapers: guides/scrapers.md
       - Data Lake: guides/datalake.md
@@ -36,9 +39,15 @@ theme:
     - scheme: default
       primary: indigo
       accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
     - scheme: slate
       primary: indigo
       accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
   features:
     - navigation.tabs
     - navigation.top
@@ -46,9 +55,14 @@ theme:
     - search.highlight
     - search.suggest
     - toc.integrate
+    - content.code.copy
   icon:
     logo: material/library
     repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - mermaid2
 
 extra:
   social:
@@ -66,13 +80,25 @@ markdown_extensions:
       guess_lang: false
   - toc:
       permalink: true
-  - pymdownx.superfences
-  - pymdownx.tabbed
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.details
-  - pymdownx.emoji
-  - pymdownx.tasklist
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - pymdownx.mark
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - attr_list
+  - md_in_html
 
 extra_css:
   - assets/custom.css

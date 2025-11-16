@@ -1,0 +1,989 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Comprehensive documentation for Open Estate AI projects" name="description"/>
+<meta content="Open Estate AI Team" name="author"/>
+<link href="https://open-estate-ai.github.io/real-estate-docs/architecture/overview/" rel="canonical"/>
+<link href="../../getting-started/" rel="prev"/>
+<link href="../ingestion-architecture/" rel="next"/>
+<link href="../../assets/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.0" name="generator"/>
+<title>Overview - Open Estate AI Docs</title>
+<link href="../../assets/stylesheets/main.618322db.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../assets/custom.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#architecture-overview">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Open Estate AI Docs" class="md-header__button md-logo" data-md-component="logo" href="../.." title="Open Estate AI Docs">
+<img alt="logo" src="../../assets/logo.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Open Estate AI Docs
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/open-estate-ai/real-estate-docs" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</div>
+<div class="md-source__repository">
+    open-estate-ai/real-estate-docs
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../getting-started/">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="./">
+          
+  
+  
+  Architecture
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../guides/scrapers.md">
+          
+  
+  
+  Guides
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../reference/api.md">
+          
+  
+  
+  Reference
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../contributing/">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../changelog.md">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+</li>
+</ul>
+</div>
+</nav>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Open Estate AI Docs" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="Open Estate AI Docs">
+<img alt="logo" src="../../assets/logo.png"/>
+</a>
+    Open Estate AI Docs
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/open-estate-ai/real-estate-docs" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</div>
+<div class="md-source__repository">
+    open-estate-ai/real-estate-docs
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+<span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/">
+<span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+<span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#system-overview">
+<span class="md-ellipsis">
+      
+        System Overview
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-they-connect">
+<span class="md-ellipsis">
+      
+        How They Connect
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#architecture-components">
+<span class="md-ellipsis">
+      
+        Architecture Components
+      
+    </span>
+</a>
+<nav aria-label="Architecture Components" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-data-ingestion-architecture">
+<span class="md-ellipsis">
+      
+        1. Data Ingestion Architecture
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-multi-agent-architecture">
+<span class="md-ellipsis">
+      
+        2. Multi-Agent Architecture
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-flow-end-to-end">
+<span class="md-ellipsis">
+      
+        Data Flow: End-to-End
+      
+    </span>
+</a>
+<nav aria-label="Data Flow: End-to-End" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#phase-1-data-collection-processing">
+<span class="md-ellipsis">
+      
+        Phase 1: Data Collection &amp; Processing
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#phase-2-user-query-response">
+<span class="md-ellipsis">
+      
+        Phase 2: User Query &amp; Response
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#technology-stack">
+<span class="md-ellipsis">
+      
+        Technology Stack
+      
+    </span>
+</a>
+<nav aria-label="Technology Stack" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-ingestion">
+<span class="md-ellipsis">
+      
+        Data Ingestion
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#multi-agent-system">
+<span class="md-ellipsis">
+      
+        Multi-Agent System
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#key-benefits">
+<span class="md-ellipsis">
+      
+        Key Benefits
+      
+    </span>
+</a>
+<nav aria-label="Key Benefits" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#for-property-seekers">
+<span class="md-ellipsis">
+      
+        For Property Seekers
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#for-developers">
+<span class="md-ellipsis">
+      
+        For Developers
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#for-contributors">
+<span class="md-ellipsis">
+      
+        For Contributors
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#getting-started">
+<span class="md-ellipsis">
+      
+        Getting Started
+      
+    </span>
+</a>
+<nav aria-label="Getting Started" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#for-data-contributors">
+<span class="md-ellipsis">
+      
+        For Data Contributors
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#for-application-developers">
+<span class="md-ellipsis">
+      
+        For Application Developers
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#for-system-administrators">
+<span class="md-ellipsis">
+      
+        For System Administrators
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#support-community">
+<span class="md-ellipsis">
+      
+        Support &amp; Community
+      
+    </span>
+</a>
+<nav aria-label="Support &amp; Community" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#documentation">
+<span class="md-ellipsis">
+      
+        Documentation
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#get-help">
+<span class="md-ellipsis">
+      
+        Get Help
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#next-steps">
+<span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#license">
+<span class="md-ellipsis">
+      
+        License
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ingestion-architecture/">
+<span class="md-ellipsis">
+    
+  
+    Data Ingestion
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../multi-agent-architecture/">
+<span class="md-ellipsis">
+    
+  
+    Multi-Agent System
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../guides/scrapers.md">
+<span class="md-ellipsis">
+    
+  
+    Scrapers
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../guides/datalake.md">
+<span class="md-ellipsis">
+    
+  
+    Data Lake
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../guides/mcp-server.md">
+<span class="md-ellipsis">
+    
+  
+    MCP Server
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../guides/ai-workflows.md">
+<span class="md-ellipsis">
+    
+  
+    AI Workflows
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../reference/api.md">
+<span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../reference/terraform.md">
+<span class="md-ellipsis">
+    
+  
+    Terraform Modules
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../reference/cdk.md">
+<span class="md-ellipsis">
+    
+  
+    CDK Stacks
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../contributing/">
+<span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../changelog.md">
+<span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">¶</a></h1>
+<p>Welcome to the Open Estate AI architecture documentation. This page provides a high-level view of how our system components work together to deliver intelligent property search and insights.</p>
+<hr/>
+<h2 id="system-overview">System Overview<a class="headerlink" href="#system-overview" title="Permanent link">¶</a></h2>
+<p>Open Estate AI is built on two main architectural pillars that work together seamlessly:</p>
+<ol>
+<li><strong><a href="../ingestion-architecture/">Data Ingestion Architecture</a></strong> - Collects, processes, and indexes real estate data</li>
+<li><strong><a href="../multi-agent-architecture/">Multi-Agent Architecture</a></strong> - Delivers intelligent search and insights through AI agents</li>
+</ol>
+<hr/>
+<h2 id="how-they-connect">How They Connect<a class="headerlink" href="#how-they-connect" title="Permanent link">¶</a></h2>
+<pre class="mermaid"><code>flowchart TB
+    subgraph Sources["🌐 Data Sources"]
+        RERA["UP RERA Website"]
+        Other["Other Property Portals"]
+    end
+
+    subgraph Ingestion["📥 Data Ingestion Pipeline"]
+        direction TB
+        Scrapers["🤖 Scrapers&lt;br/&gt;&lt;i&gt;Collect Data&lt;/i&gt;"]
+        S3Raw["📦 S3 Raw&lt;br/&gt;&lt;i&gt;Store JSON&lt;/i&gt;"]
+        Lambda["⚙️ Lambda&lt;br/&gt;&lt;i&gt;Process&lt;/i&gt;"]
+        SageMaker["🧠 SageMaker&lt;br/&gt;&lt;i&gt;Embeddings&lt;/i&gt;"]
+        S3Vectors["🔍 S3 Vectors&lt;br/&gt;&lt;i&gt;Indexed&lt;/i&gt;"]
+    end
+
+    subgraph MultiAgent["🎯 Multi-Agent System"]
+        direction TB
+        UI["💻 User Interface&lt;br/&gt;&lt;i&gt;Web/Mobile&lt;/i&gt;"]
+        Orchestrator["🎭 Orchestrator&lt;br/&gt;&lt;i&gt;Coordinates&lt;/i&gt;"]
+        Agents["🤖 AI Agents&lt;br/&gt;&lt;i&gt;Search, Legal, etc.&lt;/i&gt;"]
+    end
+
+    subgraph Users["👥 End Users"]
+        User["Property Seekers&lt;br/&gt;Investors&lt;br/&gt;Researchers"]
+    end
+
+    RERA --&gt;|"Scrape"| Scrapers
+    Other --&gt;|"Scrape"| Scrapers
+    Scrapers --&gt;|"Upload"| S3Raw
+    S3Raw --&gt;|"Trigger"| Lambda
+    Lambda --&gt;|"Generate"| SageMaker
+    SageMaker --&gt;|"Store"| S3Vectors
+
+    User --&gt;|"Query"| UI
+    UI --&gt;|"Request"| Orchestrator
+    Orchestrator --&gt;|"Coordinate"| Agents
+    Agents --&gt;|"Search"| S3Vectors
+    S3Vectors --&gt;|"Results"| Agents
+    Agents --&gt;|"Response"| Orchestrator
+    Orchestrator --&gt;|"Display"| UI
+    UI --&gt;|"Results"| User
+
+    classDef sourceStyle fill:#14B8A6,stroke:#0F766E,stroke-width:3px,color:#fff
+    classDef ingestionStyle fill:#F59E0B,stroke:#D97706,stroke-width:3px,color:#fff
+    classDef agentStyle fill:#8B5CF6,stroke:#6D28D9,stroke-width:3px,color:#fff
+    classDef userStyle fill:#4A90E2,stroke:#2E5C8A,stroke-width:3px,color:#fff
+    classDef ingestionGroupStyle fill:#FFF7E6,stroke:#FA8C16,stroke-width:3px,color:#AD4E00
+    classDef agentGroupStyle fill:#F3E8FF,stroke:#8B5CF6,stroke-width:3px,color:#5B21B6
+    classDef sourceGroupStyle fill:#CCFBF1,stroke:#14B8A6,stroke-width:3px,color:#134E4A
+    classDef userGroupStyle fill:#DBEAFE,stroke:#4A90E2,stroke-width:3px,color:#1E3A8A
+
+    class RERA,Other sourceStyle
+    class Scrapers,S3Raw,Lambda,SageMaker,S3Vectors ingestionStyle
+    class UI,Orchestrator,Agents agentStyle
+    class User userStyle
+    class Sources sourceGroupStyle
+    class Ingestion ingestionGroupStyle
+    class MultiAgent agentGroupStyle
+    class Users userGroupStyle</code></pre>
+<hr/>
+<h2 id="architecture-components">Architecture Components<a class="headerlink" href="#architecture-components" title="Permanent link">¶</a></h2>
+<h3 id="1-data-ingestion-architecture">1. Data Ingestion Architecture<a class="headerlink" href="#1-data-ingestion-architecture" title="Permanent link">¶</a></h3>
+<p><strong>Purpose</strong>: Collect, process, and make real estate data searchable</p>
+<p><strong>Key Components</strong>:
+- <strong>Scrapers</strong> - Automated data collection from websites (UP RERA, property portals)
+- <strong>S3 Raw Storage</strong> - Stores scraped data in JSON format with date partitioning
+- <strong>Lambda Processing</strong> - Transforms raw data and generates vector embeddings
+- <strong>SageMaker</strong> - ML model for creating 384-dimensional embeddings
+- <strong>S3 Vectors</strong> - Vector database for semantic search</p>
+<p><strong>Learn More</strong>: <a href="../ingestion-architecture/">📥 Data Ingestion Architecture</a></p>
+<p><strong>Key Features</strong>:
+- Automatic data collection and updates
+- Real-time processing pipeline
+- Semantic search capabilities
+- Scalable to millions of properties</p>
+<hr/>
+<h3 id="2-multi-agent-architecture">2. Multi-Agent Architecture<a class="headerlink" href="#2-multi-agent-architecture" title="Permanent link">¶</a></h3>
+<p><strong>Purpose</strong>: Deliver intelligent property search and insights through AI agents</p>
+<p><strong>Key Components</strong>:
+- <strong>User Interface</strong> - Web and mobile applications
+- <strong>Orchestrator</strong> - Coordinates multiple AI agents to handle complex queries
+- <strong>Intent Classifier</strong> - Understands user queries and extracts meaning
+- <strong>Planner Agent</strong> - Creates execution plans for complex workflows
+- <strong>Specialized Agents</strong> - Search, Legal Check, Valuation, Verification
+- <strong>Data Layer</strong> - Vector DB, Relational DB, Cache</p>
+<p><strong>Learn More</strong>: <a href="../multi-agent-architecture/">🤖 Multi-Agent Architecture</a></p>
+<p><strong>Key Features</strong>:
+- Natural language query understanding
+- Multi-agent collaboration
+- Parallel task execution
+- Comprehensive property analysis</p>
+<hr/>
+<h2 id="data-flow-end-to-end">Data Flow: End-to-End<a class="headerlink" href="#data-flow-end-to-end" title="Permanent link">¶</a></h2>
+<p>Here's how data flows from source websites to end users:</p>
+<h3 id="phase-1-data-collection-processing">Phase 1: Data Collection &amp; Processing<a class="headerlink" href="#phase-1-data-collection-processing" title="Permanent link">¶</a></h3>
+<ol>
+<li><strong>Scrapers</strong> collect property data from UP RERA and other sources</li>
+<li><strong>Raw data</strong> is uploaded to S3 in NDJSON format</li>
+<li><strong>Lambda function</strong> is triggered automatically</li>
+<li><strong>SageMaker</strong> generates vector embeddings from property descriptions</li>
+<li><strong>Vectors are stored</strong> in S3 Vectors with metadata</li>
+<li><strong>Data is indexed</strong> for fast semantic search</li>
+</ol>
+<h3 id="phase-2-user-query-response">Phase 2: User Query &amp; Response<a class="headerlink" href="#phase-2-user-query-response" title="Permanent link">¶</a></h3>
+<ol>
+<li><strong>User</strong> submits a query: "Find 3 bedroom apartments in Noida under construction"</li>
+<li><strong>UI</strong> sends request to Orchestrator</li>
+<li><strong>Intent Classifier</strong> extracts: <code>bedrooms=3, location=Noida, status=under_construction</code></li>
+<li><strong>Planner Agent</strong> creates workflow: Search → Legal Check → Valuation → Verify</li>
+<li><strong>Search Agent</strong> queries S3 Vectors using semantic similarity</li>
+<li><strong>Legal Agent</strong> validates RERA registration</li>
+<li><strong>Valuation Agent</strong> provides price analysis</li>
+<li><strong>Verification Agent</strong> checks data quality</li>
+<li><strong>Orchestrator</strong> aggregates results and applies confidence scoring</li>
+<li><strong>UI</strong> displays ranked properties with insights</li>
+</ol>
+<hr/>
+<h2 id="technology-stack">Technology Stack<a class="headerlink" href="#technology-stack" title="Permanent link">¶</a></h2>
+<h3 id="data-ingestion">Data Ingestion<a class="headerlink" href="#data-ingestion" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Compute</strong>: AWS App Runner, AWS Lambda</li>
+<li><strong>Storage</strong>: AWS S3 (Raw + Vectors)</li>
+<li><strong>ML</strong>: AWS SageMaker (sentence-transformers/all-MiniLM-L6-v2)</li>
+<li><strong>Processing</strong>: Python 3.12, Playwright, FastMCP</li>
+<li><strong>AI</strong>: AWS Bedrock (Claude Haiku)</li>
+</ul>
+<h3 id="multi-agent-system">Multi-Agent System<a class="headerlink" href="#multi-agent-system" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Frontend</strong>: React/Next.js (Web), React Native (Mobile)</li>
+<li><strong>Backend</strong>: FastAPI, Python</li>
+<li><strong>Orchestration</strong>: Message Queue (AWS SQS/RabbitMQ)</li>
+<li><strong>Database</strong>: PostgreSQL (Relational), Redis (Cache), S3 Vectors</li>
+<li><strong>AI</strong>: AWS Bedrock, OpenAI API (tracing only)</li>
+<li><strong>Infrastructure</strong>: AWS (ECS, Lambda, RDS, ElastiCache)</li>
+</ul>
+<hr/>
+<h2 id="key-benefits">Key Benefits<a class="headerlink" href="#key-benefits" title="Permanent link">¶</a></h2>
+<h3 id="for-property-seekers">For Property Seekers<a class="headerlink" href="#for-property-seekers" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Natural Language Search</strong> - Ask questions like you would to a human</li>
+<li><strong>Comprehensive Analysis</strong> - Legal status, price analysis, verification</li>
+<li><strong>Intelligent Recommendations</strong> - Personalized based on preferences</li>
+<li><strong>Real-time Updates</strong> - Always up-to-date property information</li>
+</ul>
+<h3 id="for-developers">For Developers<a class="headerlink" href="#for-developers" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Modular Architecture</strong> - Easy to add new data sources or agents</li>
+<li><strong>Scalable Design</strong> - Handles growing data and user base</li>
+<li><strong>Observable System</strong> - Full tracing and monitoring</li>
+<li><strong>Cost Effective</strong> - Optimized for cloud economics</li>
+</ul>
+<h3 id="for-contributors">For Contributors<a class="headerlink" href="#for-contributors" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Clear Separation</strong> - Ingestion and multi-agent systems are independent</li>
+<li><strong>Well Documented</strong> - Comprehensive architecture docs</li>
+<li><strong>Open Source</strong> - Community-driven development</li>
+<li><strong>Modern Stack</strong> - Latest AI/ML technologies</li>
+</ul>
+<hr/>
+<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">¶</a></h2>
+<h3 id="for-data-contributors">For Data Contributors<a class="headerlink" href="#for-data-contributors" title="Permanent link">¶</a></h3>
+<ol>
+<li>Review <a href="../ingestion-architecture/">Data Ingestion Architecture</a></li>
+<li>Set up scrapers following the <a href="../../real-estate-scrapers/">scraper guide</a></li>
+<li>Deploy infrastructure using Terraform</li>
+<li>Monitor data quality and processing</li>
+</ol>
+<h3 id="for-application-developers">For Application Developers<a class="headerlink" href="#for-application-developers" title="Permanent link">¶</a></h3>
+<ol>
+<li>Review <a href="../multi-agent-architecture/">Multi-Agent Architecture</a></li>
+<li>Understand agent communication protocols</li>
+<li>Use the API to query property data</li>
+<li>Build UI components for your use case</li>
+</ol>
+<h3 id="for-system-administrators">For System Administrators<a class="headerlink" href="#for-system-administrators" title="Permanent link">¶</a></h3>
+<ol>
+<li>Review both architecture documents</li>
+<li>Set up monitoring and alerting</li>
+<li>Configure cost controls</li>
+<li>Implement backup strategies</li>
+</ol>
+<hr/>
+<h2 id="support-community">Support &amp; Community<a class="headerlink" href="#support-community" title="Permanent link">¶</a></h2>
+<h3 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">¶</a></h3>
+<ul>
+<li><a href="../ingestion-architecture/">Data Ingestion Architecture</a></li>
+<li><a href="../multi-agent-architecture/">Multi-Agent Architecture</a></li>
+<li><a href="../api-reference/">API Reference</a></li>
+<li><a href="../../contributing/">Contributing Guide</a></li>
+</ul>
+<h3 id="get-help">Get Help<a class="headerlink" href="#get-help" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>GitHub Issues</strong>: <a href="https://github.com/open-estate-ai/real-estate-docs/issues">open-estate-ai/real-estate-docs</a></li>
+<li><strong>Slack Community</strong>: <a href="https://join.slack.com/t/open-estate-ai/shared_invite/zt-3dk65gu4h-SmBeySssL732C3ReHL_ejQ">Join our Slack</a></li>
+<li><strong>Documentation</strong>: <a href="https://docs.open-estate-ai.org">docs.open-estate-ai.org</a></li>
+</ul>
+<hr/>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<ol>
+<li><strong>Understand the Architecture</strong>: Read the detailed docs for <a href="../ingestion-architecture/">Ingestion</a> and <a href="../multi-agent-architecture/">Multi-Agent</a> systems</li>
+<li><strong>Set Up Your Environment</strong>: Follow the setup guides in each repository</li>
+<li><strong>Explore the Code</strong>: Check out the GitHub repositories</li>
+<li><strong>Join the Community</strong>: Connect with other contributors on Slack</li>
+<li><strong>Start Contributing</strong>: Pick an issue and submit your first PR!</li>
+</ol>
+<hr/>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">¶</a></h2>
+<p>See repository root for license information.</p>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      © Open Estate AI
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/open-estate-ai" rel="noopener" target="_blank" title="GitHub">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</a>
+<a class="md-social__link" href="https://join.slack.com/t/open-estate-ai/shared_invite/zt-3dk65gu4h-SmBeySssL732C3ReHL_ejQ" rel="noopener" target="_blank" title="Slack">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M94.1 315.1c0 25.9-21.2 47.1-47.1 47.1S0 341 0 315.1 21.2 268 47.1 268h47.1v47.1zm23.7 0c0-25.9 21.2-47.1 47.1-47.1s47.1 21.2 47.1 47.1v117.8c0 25.9-21.2 47.1-47.1 47.1s-47.1-21.2-47.1-47.1zm47.1-189c-25.9 0-47.1-21.2-47.1-47.1s21.2-47 47.1-47S212 53.2 212 79.1v47.1h-47.1zm0 23.7c25.9 0 47.1 21.2 47.1 47.1S190.8 244 164.9 244H47.1C21.2 244 0 222.8 0 196.9s21.2-47.1 47.1-47.1zm189 47.1c0-25.9 21.2-47.1 47.1-47.1s47 21.2 47 47.1-21.2 47.1-47.1 47.1h-47.1v-47.1zm-23.7 0c0 25.9-21.2 47.1-47.1 47.1S236 222.8 236 196.9V79.1c0-25.9 21.2-47.1 47.1-47.1s47.1 21.2 47.1 47.1zm-47.1 189c25.9 0 47.1 21.2 47.1 47.1s-21.2 47-47.1 47-47.1-21.2-47.1-47.1v-47.1h47.1zm0-23.7c-25.9 0-47.1-21.2-47.1-47.1s21.2-47.1 47.1-47.1h117.8c25.9 0 47.1 21.2 47.1 47.1s-21.2 47.1-47.1 47.1z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.sections", "search.highlight", "search.suggest", "toc.integrate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+<script src="../../assets/custom.js"></script>
+</body>
+</html>
